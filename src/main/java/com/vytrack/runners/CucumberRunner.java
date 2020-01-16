@@ -9,8 +9,10 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",   // path to features
         glue = "com/vytrack/step_definitions",      // path to definitions
-        dryRun = false,
-        tags = "@negative_test"
+        dryRun = true, // false when we run tests , =true --> we dont run tests, just checking if everyhting ready for testing
+        tags = "@smoke_test",
+        plugin = {"html:target/default-cucumber-reports"}
+
 )
 public class CucumberRunner {
 }

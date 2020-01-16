@@ -1,4 +1,5 @@
 package com.vytrack.step_definitions;
+import com.vytrack.utilities.Driver;
 import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -9,6 +10,7 @@ public class Hook {
     public void setup(){
         System.out.println("################");
         System.out.println("Test setup!");
+        Driver.get().manage().window().maximize();
     }
 
     @After
@@ -21,6 +23,8 @@ public class Hook {
        }
 
         System.out.println("################");
+       // after every test, we gonna close browser
+       Driver.close();
 
     }
 }
