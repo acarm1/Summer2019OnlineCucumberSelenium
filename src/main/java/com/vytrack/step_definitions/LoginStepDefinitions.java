@@ -14,7 +14,7 @@ public class LoginStepDefinitions {
     @Given("user is on the login page")
     public void user_is_on_the_login_page() {
         System.out.println("I am on the login page");
-        Driver.get().get(ConfigurationReader.getProperty("url"));
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
     }
     @Then("user logs in as store manager")
     public void user_logs_in_as_store_manager() {

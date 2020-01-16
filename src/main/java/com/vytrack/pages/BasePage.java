@@ -39,7 +39,7 @@ public class BasePage {
         //this method requires to provide webdriver object for @FindBy
         //and page class
         //this means this page class
-        PageFactory.initElements(Driver.get(), this);
+        PageFactory.initElements(Driver.getDriver(), this);
     }
 
     /**
@@ -52,7 +52,7 @@ public class BasePage {
      * @return true if loader mask is gone, false if something went wrong
      */
     public boolean waitUntilLoaderMaskDisappear() {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), 30);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='loader-mask shown']")));
             return true;
@@ -76,21 +76,21 @@ public class BasePage {
      * @param subModuleName normalize-space() same line .trim() in java
      */
     public void navigateTo(String moduleName, String subModuleName) {
-        Actions actions = new Actions(Driver.get());
+        Actions actions = new Actions(Driver.getDriver());
         String moduleLocator = "//*[normalize-space()='" + moduleName + "' and @class='title title-level-1']";
         String subModuleLocator = "//*[normalize-space()='" + subModuleName + "' and @class='title title-level-2']";
 
-        WebDriverWait wait = new WebDriverWait(Driver.get(), 20);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(moduleLocator)));
 
-        WebElement module = Driver.get().findElement(By.xpath(moduleLocator));
+        WebElement module = Driver.getDriver().findElement(By.xpath(moduleLocator));
         wait.until(ExpectedConditions.visibilityOf(module));
         wait.until(ExpectedConditions.elementToBeClickable(module));
 
         waitUntilLoaderMaskDisappear();
 
         BrowserUtils.clickWithWait(module); //if click is not working well
-        WebElement subModule = Driver.get().findElement(By.xpath(subModuleLocator));
+        WebElement subModule = Driver.getDriver().findElement(By.xpath(subModuleLocator));
         if (!subModule.isDisplayed()) {
             actions.doubleClick(module).doubleClick().build().perform();
             try {
@@ -134,7 +134,7 @@ public class BasePage {
     }
 
     public void waitForPageSubTitle(String pageSubtitleText) {
-        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.textToBe(By.cssSelector("h1[class='oro-subtitle']"), pageSubtitleText));
+        new WebDriverWait(Driver.getDriver(), 10).until(ExpectedConditions.textToBe(By.cssSelector("h1[class='oro-subtitle']"), pageSubtitleText));
     }
 
 }

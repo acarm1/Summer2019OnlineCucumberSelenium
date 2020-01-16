@@ -65,7 +65,7 @@ public class CreateCalendarEventPage extends BasePage {
         String locator = "//td//label[text()='" + name + "']/../following-sibling::td//input";
         //find element
         //you can also call Driver.get()
-        WebElement gridOption = Driver.get().findElement(By.xpath(locator));
+        WebElement gridOption = Driver.getDriver().findElement(By.xpath(locator));
         //if param yesOrNo is true, and checkbox is not selected yet
         //click on it
         //or
@@ -122,7 +122,7 @@ public class CreateCalendarEventPage extends BasePage {
         new Select(yearDropdown).selectByVisibleText(year + "");
 
         //select day
-        Driver.get().findElement(By.xpath(dayLocator)).click();
+        Driver.getDriver().findElement(By.xpath(dayLocator)).click();
     }
 
     public void selectTomorrowDay() {
@@ -138,7 +138,7 @@ public class CreateCalendarEventPage extends BasePage {
         Select monthSelect = new Select(monthDropdown);
         monthSelect.selectByIndex(month - 1);
         String dayLocator = "//table[@class='ui-datepicker-calendar']//a[text()='" + day + "']";
-        Driver.get().findElement(By.xpath(dayLocator)).click();
+        Driver.getDriver().findElement(By.xpath(dayLocator)).click();
     }
 
 
@@ -150,7 +150,7 @@ public class CreateCalendarEventPage extends BasePage {
         Select monthSelect = new Select(monthDropdown);
         monthSelect.selectByIndex(month - 1);
         String dayLocator = "//table[@class='ui-datepicker-calendar']//a[text()='" + day + "']";
-        Driver.get().findElement(By.xpath(dayLocator)).click();
+        Driver.getDriver().findElement(By.xpath(dayLocator)).click();
     }
 
     public void selectTodayDate() {
@@ -158,10 +158,10 @@ public class CreateCalendarEventPage extends BasePage {
         startDate.click();
         String dayLocator = "//table[@class='ui-datepicker-calendar']//a[text()='" + day + "']";
         try {
-            Driver.get().findElement(By.xpath(dayLocator)).click();
+            Driver.getDriver().findElement(By.xpath(dayLocator)).click();
         } catch (Exception e) {
             BrowserUtils.wait(1);
-            Driver.get().findElement(By.xpath(dayLocator)).click();
+            Driver.getDriver().findElement(By.xpath(dayLocator)).click();
         }
     }
 
@@ -170,8 +170,8 @@ public class CreateCalendarEventPage extends BasePage {
         waitUntilLoaderMaskDisappear();
         String startTimeToSelect = "(//li[text()='" + time + "'])[1]";
         startTime.click();
-        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(startTimeToSelect)));
-        Driver.get().findElement(By.xpath(startTimeToSelect)).click();
+        new WebDriverWait(Driver.getDriver(), 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(startTimeToSelect)));
+        Driver.getDriver().findElement(By.xpath(startTimeToSelect)).click();
     }
 
     public void selectStartTime(String time) {
@@ -183,21 +183,21 @@ public class CreateCalendarEventPage extends BasePage {
             System.out.println(e.getMessage());
             BrowserUtils.clickWithWait(startTime);
         }
-        new WebDriverWait(Driver.get(), 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(startTimeToSelect)));
-        Driver.get().findElement(By.xpath(startTimeToSelect)).click();
+        new WebDriverWait(Driver.getDriver(), 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(startTimeToSelect)));
+        Driver.getDriver().findElement(By.xpath(startTimeToSelect)).click();
     }
 
     public void selectEndTime(String time) {
         waitUntilLoaderMaskDisappear();
         String endTimeToSelect = "(//li[text()='" + time + "'])[2]";
         startTime.click();
-        Driver.get().findElement(By.xpath(endTimeToSelect)).click();
+        Driver.getDriver().findElement(By.xpath(endTimeToSelect)).click();
     }
 
     public long differenceBetweenStartTimeAndEndTime() {
         LocalTime actualStartTime = LocalTime.parse(startTime.getAttribute("value"), DateTimeFormatter.ofPattern("h:mm a"));
         try {
-            new WebDriverWait(Driver.get(), 3).until(ExpectedConditions.invisibilityOf(startTime));
+            new WebDriverWait(Driver.getDriver(), 3).until(ExpectedConditions.invisibilityOf(startTime));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -217,10 +217,10 @@ public class CreateCalendarEventPage extends BasePage {
         startDate.click();
         String dayLocator = "//table[@class='ui-datepicker-calendar']//a[text()='" + day + "']";
         try {
-            Driver.get().findElement(By.xpath(dayLocator)).click();
+            Driver.getDriver().findElement(By.xpath(dayLocator)).click();
         } catch (Exception e) {
             BrowserUtils.wait(1);
-            Driver.get().findElement(By.xpath(dayLocator)).click();
+            Driver.getDriver().findElement(By.xpath(dayLocator)).click();
         }
     }
 
